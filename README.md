@@ -1,5 +1,8 @@
 # Consulta de dados de Cultura Agrícola.
 
+## Arquitetura utilizada:
+imagem do excalidraw aqui
+
 ## 📌 Requisitos
 
 - Python 3.13+

@@ -1,14 +1,17 @@
 import requests
 import json
+import os
 from datetime import datetime, timedelta
 from typing import List, Dict
+
+
 
 
 class WeatherApi:
     """Classe para coletar dados climáticos históricos utilizando a API WeatherAPI."""
 
     def __init__(self):
-        self.weather_api_key = "a719506c7c8549459ae205820250803"  # os.getenv("WEATHER_API_KEY")
+        self.weather_api_key = os.getenv("WEATHER_API_KEY", "a719506c7c8549459ae205820250803")
         self.base_url = "http://api.weatherapi.com/v1"
 
     def get_weather_data(self, location: str, start_date: str, end_date: str) -> List[Dict]:
