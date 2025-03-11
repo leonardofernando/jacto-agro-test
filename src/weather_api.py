@@ -63,5 +63,5 @@ if __name__ == "__main__":
     data = WeatherApi().get_weather_data(location=location, start_date=start_date, end_date=end_date)
     print(f"{data}")
     
-    # with open(f"../data/json/weather_{location}.json", "w") as file:
-    #     file.write(json.dumps(data, indent=4))
+    with open(f"../data/json/weather_{location}.json", "w") as file:
+        file.write(json.dumps(data, indent=4))

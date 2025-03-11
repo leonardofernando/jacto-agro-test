@@ -21,7 +21,7 @@ Qual será o resultado da minha safra nessa semana, separado por dia?
 """
 
 
-app = FastAPI(title="Consulta de dados Agrícolas.")
+app = FastAPI(title="Consulta de dados Agrícolas.", description="chaisa")
 
 
 class QueryRequest(BaseModel):
@@ -29,7 +29,7 @@ class QueryRequest(BaseModel):
     top_k: int = 3
 
 
-@app.post("/buscar/")
+@app.post("/buscar/", summary="bla bla bla")
 def buscar(request: QueryRequest):
     chroma_db = Chromadb()
     results = chroma_db.query(query_text=request.query)
