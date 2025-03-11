@@ -1,7 +1,7 @@
 # python
 .python-version
 .venv
-**/__pycache__/** */
+__pycache__/
 
 # json archives
 data/json/*.json

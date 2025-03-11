@@ -23,11 +23,9 @@ E com base no clima da semana seguinte:
 Questão: {question}
 """
 
-# Qual será o resultado da minha safra nessa semana, separado por dia?
-
 
 def main():
-    # arg parse msg do usuario
+    # Busca do usuário
     parser = argparse.ArgumentParser()
     parser.add_argument("--query", action="store", type=str, help="Perguntas e textos para o LLM analisar.")
     args = parser.parse_args()
@@ -36,24 +34,26 @@ def main():
     # query = "quais dias ideais para temperatura do milho?"
     # query = "melhor plantar milho, trigo ou arroz esta semana?"
     # query = "quais dias ideais para plantar soja?"
+
+    print(f"Pergunta: {query}\n\n")
     
+    # Start ChromaDB
     chroma_db = Chromadb()
-    print("Start ChromaDB\n\n")
     results = chroma_db.query(query_text=query)
 
-    print("Criando/formatando contexto\n\n")
+    # Criando/formatando contexto
     context = "\n\n----\n\n".join(results)
 
-    print("Buscando dados climáticos:")
+    # Buscando dados climáticos
     weather_data = WeatherApi().get_weather_data(location="Curitiba", start_date="2025-03-02", end_date="2025-03-09")
-    print(f"{weather_data}\n\n")
+    # print(f"{weather_data}\n\n")
 
-    print("Gerando prompt para o llm:")
+    # Gerando prompt para o llm
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.invoke({"context": context, "weather": weather_data, "question": query})
-    print(f"{prompt}\n\n")
+    # print(f"{prompt}\n\n")
 
-    print("Chamando llm e passando prompt\n\n")
+    # Chamando llm e passando prompt
     model = OllamaLLM(model="mistral")
     prompt_response = model.invoke(prompt)
     print(f"Resposta: {prompt_response}")
