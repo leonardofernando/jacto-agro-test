@@ -1,0 +1,12 @@
+requests==2.32.3
+chromadb==0.6.3
+sentence-transformers==3.4.1
+langchain==0.3.20
+langchain-community==0.3.19
+langchain-chroma==0.2.2
+langchain-ollama==0.2.3
+boto3==1.37.9
+pypdf==5.3.1
+jq==1.8.0
+fastapi==0.115.11
+uvicorn==0.34.0

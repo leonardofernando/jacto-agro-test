@@ -1,0 +1,10 @@
+# python
+.python-version
+.venv
+**/__pycache__/** */
+
+# json archives
+data/json/*.json
+
+# chromadb
+chroma/chromadb
