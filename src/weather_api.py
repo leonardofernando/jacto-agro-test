@@ -1,25 +1,28 @@
 import requests
 import json
-import os
 from datetime import datetime, timedelta
+from typing import List, Dict
 
-# WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")  # a719506c7c8549459ae205820250803
-# BASE_URL = "http://api.weatherapi.com/v1"
 
 class WeatherApi:
+    """Classe para coletar dados climáticos históricos utilizando a API WeatherAPI."""
+
     def __init__(self):
-        self.weather_api_key = "a719506c7c8549459ae205820250803"
+        self.weather_api_key = "a719506c7c8549459ae205820250803"  # os.getenv("WEATHER_API_KEY")
         self.base_url = "http://api.weatherapi.com/v1"
 
-    def get_weather_data(self, location: str, start_date: str, end_date: str):
+    def get_weather_data(self, location: str, start_date: str, end_date: str) -> List[Dict]:
         """
-        Coletar os dados da api de históricos climáticos de um período.
+        Coleta dados climáticos históricos para um local e período específico.
         
-        location: Local
-        start_date: data inicial
-        end_date: data final
+        Args:
+            location (str): Localização para consulta.
+            start_date (str): Data inicial no formato "YYYY-MM-DD".
+            end_date (str): Data final no formato "YYYY-MM-DD".
+        
+        Returns:
+            list: Lista de dicionários contendo dados climáticos diários.
         """
-        
         weather_data = []
 
         date = datetime.strptime(start_date, "%Y-%m-%d")
