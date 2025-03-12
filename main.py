@@ -25,7 +25,14 @@ Questão: {question}
 
 
 def main():
-    # Busca do usuário
+    """
+    Função principal que executa a consulta de dados agrícolas.
+    
+    - Recebe uma pergunta via argumento de linha de comando.
+    - Busca informações relacionadas no banco de vetores (ChromaDB).
+    - Obtém dados climáticos da API de clima.
+    - Constrói um prompt e consulta um modelo de linguagem para obter insights agrícolas.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("--query", action="store", type=str, help="Perguntas e textos para o LLM analisar.")
     args = parser.parse_args()
@@ -37,23 +44,16 @@ def main():
 
     print(f"Pergunta: {query}\n\n")
     
-    # Start ChromaDB
     chroma_db = Chromadb()
     results = chroma_db.query(query_text=query)
 
-    # Criando/formatando contexto
     context = "\n\n----\n\n".join(results)
 
-    # Buscando dados climáticos
     weather_data = WeatherApi().get_weather_data(location="Curitiba", start_date="2025-03-02", end_date="2025-03-09")
-    # print(f"{weather_data}\n\n")
 
-    # Gerando prompt para o llm
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.invoke({"context": context, "weather": weather_data, "question": query})
-    # print(f"{prompt}\n\n")
 
-    # Chamando llm e passando prompt
     model = OllamaLLM(model="mistral")
     prompt_response = model.invoke(prompt)
     print(f"Resposta: {prompt_response}")

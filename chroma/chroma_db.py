@@ -6,6 +6,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
+from dotenv import load_dotenv
 from typing import List
 
 
@@ -175,6 +176,7 @@ class Chromadb:
 
 
 if __name__ == "__main__":
+    load_dotenv(".env")
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--json", action="store_true", help="Vetorizar arquivos .json")
