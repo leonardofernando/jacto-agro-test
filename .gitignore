@@ -7,7 +7,7 @@ __pycache__/
 data/json/*.json
 
 # chromadb
-chroma/chromadb/*
+chroma/chromadb/
 
 # Envs
 .env

@@ -1,6 +1,4 @@
 import argparse
-from fastapi import FastAPI, Query
-from pydantic import BaseModel
 from chroma.chroma_db import Chromadb
 from src.weather_api import WeatherApi
 from langchain_ollama import OllamaLLM

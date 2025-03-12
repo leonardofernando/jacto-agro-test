@@ -54,5 +54,5 @@ results = chroma_db.query(query_text="text_to_search_in_database")
 
 ## WeatherAPI
 
-Este código coleta dados climáticos históricos de um local específico utilizando a API WeatherAPI e armazena os dados em um arquivo JSON.
+Este código coleta dados climáticos históricos de um local específico utilizando a API WeatherAPI.
 
