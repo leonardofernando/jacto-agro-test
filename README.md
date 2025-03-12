@@ -10,8 +10,24 @@ imagem do excalidraw aqui
   - Baixe modelos de LLM, ex: Mistral, DeepSeak, Llama2, etc...
 - Instale as dependências necessárias: `$ pip install -r requirements.txt`
 
+## Api de Consulta Agrícola
 
-# ChromaDB
+Como subir a api:
+```sh
+$ uvicorn app:app --reload
+```
+
+Endpoints:
+- Health Check: http://localhost:8000/health
+- Buscar: http://localhost:8000/buscar
+  - Parâmetros:
+  ```
+  query: Texto de busca do usuário
+  top_k (opcional, default: 3): Parâmetro de busca no banco vetorial
+  ```
+- Swagger Docs: http://localhost:8000/docs
+
+## ChromaDB
 
 Este código permite a extração, vetorização e armazenamento de documentos em um banco de dados vetorial utilizando ChromaDB. Ele suporta arquivos **PDF** e **JSON**.
 
@@ -36,7 +52,7 @@ chroma_db = Chromadb()
 results = chroma_db.query(query_text="text_to_search_in_database")
 ```
 
-# WeatherAPI
+## WeatherAPI
 
 Este código coleta dados climáticos históricos de um local específico utilizando a API WeatherAPI e armazena os dados em um arquivo JSON.
 

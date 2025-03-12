@@ -3,15 +3,14 @@ import json
 import os
 from datetime import datetime, timedelta
 from typing import List, Dict
-
-
+from dotenv import load_dotenv
 
 
 class WeatherApi:
     """Classe para coletar dados climáticos históricos utilizando a API WeatherAPI."""
 
     def __init__(self):
-        self.weather_api_key = os.getenv("WEATHER_API_KEY", "a719506c7c8549459ae205820250803")
+        self.weather_api_key = os.getenv("WEATHER_API_KEY")
         self.base_url = "http://api.weatherapi.com/v1"
 
     def get_weather_data(self, location: str, start_date: str, end_date: str) -> List[Dict]:
@@ -62,6 +61,7 @@ class WeatherApi:
 
 
 if __name__ == "__main__":
+    load_dotenv(".env")
     location = "Curitiba"
     start_date = "2025-03-02"
     end_date = "2025-03-09"
@@ -69,5 +69,5 @@ if __name__ == "__main__":
     data = WeatherApi().get_weather_data(location=location, start_date=start_date, end_date=end_date)
     print(f"{data}")
     
-    with open(f"../data/json/weather_{location}.json", "w") as file:
-        file.write(json.dumps(data, indent=4))
+    # with open(f"data/json/weather_{location}.json", "w") as file:
+    #     file.write(json.dumps(data, indent=4))

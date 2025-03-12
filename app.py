@@ -21,16 +21,32 @@ Qual será o resultado da minha safra nessa semana, separado por dia?
 """
 
 
-app = FastAPI(title="Consulta de dados Agrícolas.", description="chaisa")
+app = FastAPI(title="Consulta de dados Agrícolas.", description="API para consulta de dados agrícolas usando RAG.")
 
 
 class QueryRequest(BaseModel):
+    """
+    Modelo de requisição para busca de informações no banco de dados vetorial.
+
+    Atributos:
+        query (str): Consulta a ser realizada na base de dados.
+        top_k (int): Número de resultados mais relevantes a serem retornados.
+    """
     query: str
     top_k: int = 3
 
 
-@app.post("/buscar/", summary="bla bla bla")
+@app.post("/buscar/", summary="Consulta dados agrícolas com análise de safra.")
 def buscar(request: QueryRequest):
+    """
+    Endpoint para buscar informações no banco de dados vetorial e prever o resultado da safra com base no clima."
+
+    Parâmetros:
+        request (QueryRequest): Dados da consulta contendo a query e o número de resultados desejados.
+
+    Retorna:
+        dict: Resposta gerada pelo modelo de IA com a previsão da safra.
+    """
     chroma_db = Chromadb()
     results = chroma_db.query(query_text=request.query)
 
@@ -51,4 +67,10 @@ def buscar(request: QueryRequest):
 
 @app.get("/health")
 def health_check():
+    """
+    Endpoint para checar o status de funcionamento da API."
+
+    Retorna:
+        dict: Status da API.
+    """
     return {"status": "OK"}
